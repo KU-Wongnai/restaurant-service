@@ -9,7 +9,7 @@ CRUD api for restaurant, restaurant menu and menu options
 ## Setup
 1. Clone the repo
     ```sh
-    git clone 
+    git clone https://github.com/KU-Wongnai/restaurant-service.git
     ```
 2. Run `RestaurantApplication.java` to start the service
 
@@ -110,3 +110,5 @@ Service runs at http://localhost:8092
 [Spring-url]: https://spring.io
 [Spring.io/spring-boot]: https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot
 [Spring-Boot-url]: https://spring.io/projects/spring-boot
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>

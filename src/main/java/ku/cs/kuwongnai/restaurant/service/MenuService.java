@@ -1,7 +1,5 @@
 package ku.cs.kuwongnai.restaurant.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import ku.cs.kuwongnai.restaurant.entity.Menu;
 import ku.cs.kuwongnai.restaurant.entity.Restaurant;
 import ku.cs.kuwongnai.restaurant.model.MenuRequest;
@@ -25,9 +23,6 @@ public class MenuService {
     @Autowired
     private ModelMapper modelMapper;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     public List<Menu> getAllMenus() {
         return menuRepository.findAll();
     }
@@ -40,7 +35,7 @@ public class MenuService {
         return menuRepository.save(record);
     }
 
-    public Menu updateMenu(Long id, Menu requestBody) {
+    public Menu updateMenu(Long id, MenuRequest requestBody) {
         Menu record = menuRepository.findById(id).get();
         record.setName(requestBody.getName());
         record.setDescription(requestBody.getDescription());
@@ -50,12 +45,10 @@ public class MenuService {
         return menuRepository.save(record);
     }
 
-    public ObjectNode deleteMenu(Long id) {
+    public Menu deleteMenu(Long id) {
+        Menu record = menuRepository.findById(id).get();
         menuRepository.deleteById(id);
-        ObjectNode response = objectMapper.createObjectNode();
-        response.put("message", "Menu ID " + id + " deleted successfully");
-        response.put("success", true);
-        return response;
+        return record;
     }
 
     public Menu getMenuById(Long id) {

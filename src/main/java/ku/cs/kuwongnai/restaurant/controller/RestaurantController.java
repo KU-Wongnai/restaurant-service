@@ -1,6 +1,7 @@
 package ku.cs.kuwongnai.restaurant.controller;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import jakarta.validation.Valid;
 import ku.cs.kuwongnai.restaurant.entity.Menu;
 import ku.cs.kuwongnai.restaurant.entity.Restaurant;
 import ku.cs.kuwongnai.restaurant.model.MenuRequest;
@@ -8,11 +9,11 @@ import ku.cs.kuwongnai.restaurant.model.RestaurantRequest;
 import ku.cs.kuwongnai.restaurant.service.MenuService;
 import ku.cs.kuwongnai.restaurant.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/restaurants")
@@ -21,27 +22,29 @@ public class RestaurantController {
     @Autowired
     private RestaurantService service;
 
-    @Autowired
-    private MenuService menuService;
-
     @PostMapping
-    public Restaurant create(@RequestBody RestaurantRequest restaurant) {
-        return service.createRestaurant(restaurant);
+    public ResponseEntity<Restaurant> create(@Valid @RequestBody RestaurantRequest restaurant) {
+        Restaurant createdRestaurant = service.createRestaurant(restaurant);
+
+        return new ResponseEntity<>(createdRestaurant, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public Restaurant update(@PathVariable Long id, @RequestBody RestaurantRequest restaurant) {
-        return service.updateRestaurant(id, restaurant);
+    public ResponseEntity<Restaurant> update(@PathVariable Long id, @Valid @RequestBody RestaurantRequest restaurant) {
+        Restaurant updatedRestaurant = service.updateRestaurant(id, restaurant);
+        return new ResponseEntity<>(updatedRestaurant, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ObjectNode delete(@PathVariable Long id) {
-        return service.deleteRestaurant(id);
+    public ResponseEntity<Restaurant> delete(@PathVariable Long id) {
+        Restaurant deletedRestaurant = service.deleteRestaurant(id);
+        return new ResponseEntity<>(deletedRestaurant, HttpStatus.OK);
     }
 
     @PostMapping("/{id}")
-    public Menu createMenu(@PathVariable Long id, @RequestBody MenuRequest menu) {
-        return service.createMenu(id, menu);
+    public ResponseEntity<Menu> createMenu(@PathVariable Long id, @Valid @RequestBody MenuRequest menu) {
+        Menu createdMenu = service.createMenu(id, menu);
+        return new ResponseEntity<>(createdMenu, HttpStatus.CREATED);
     }
 
     @GetMapping

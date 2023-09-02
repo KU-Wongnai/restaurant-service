@@ -39,7 +39,6 @@ Create menu for restaurant with the specified id
 {
   "name" : "Sushi",
   "description" : "Very delicious",
-  "image" : null,
   "price" : 250,
   "category" : "Japanese"
 }
@@ -72,6 +71,8 @@ Create menu for restaurant with the specified id
 ### Delete
 > DELETE -> http://localhost:8092/api/restaurants/{id}
 
+([back to top][readme-top])
+
 ## Menu
 
 ### Create
@@ -81,7 +82,6 @@ Create menu for restaurant with the specified id
   "name" : "Sushi",
   "restaurantId" : 1,
   "description" : "Very delicious",
-  "image" : null,
   "price" : 250,
   "category" : "Japanese"
 }
@@ -109,7 +109,6 @@ Insert `restaurantId` to specify which restaurant this menu belongs to
 {
   "name" : "Sashimi",
   "description" : "Super delicious",
-  "image" : null,
   "price" : 500,
   "category" : "Japanese"
 }
@@ -119,10 +118,12 @@ Insert `restaurantId` to specify which restaurant this menu belongs to
 ### Delete
 > DELETE -> http://localhost:8092/api/menus/{id}
 
-<!-- MARKDOWN LINKS & IMAGES -->
+([back to top][readme-top])
+
+<!-- Markdown Links & Images -->
 [Spring.io]: https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white
 [Spring-url]: https://spring.io
 [Spring.io/spring-boot]: https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot
 [Spring-Boot-url]: https://spring.io/projects/spring-boot
+[readme-top]: #ku-wongnai---restaurant-service
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>

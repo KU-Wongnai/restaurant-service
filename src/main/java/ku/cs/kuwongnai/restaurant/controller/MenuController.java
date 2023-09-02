@@ -1,10 +1,13 @@
 package ku.cs.kuwongnai.restaurant.controller;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import jakarta.validation.Valid;
 import ku.cs.kuwongnai.restaurant.entity.Menu;
 import ku.cs.kuwongnai.restaurant.model.MenuRequest;
 import ku.cs.kuwongnai.restaurant.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,46 +17,49 @@ import java.util.List;
 public class MenuController {
 
     @Autowired
-    private MenuService menuService;
+    private MenuService service;
 
     @GetMapping
     public List<Menu> getAllMenus() {
-        return menuService.getAllMenus();
+        return service.getAllMenus();
     }
 
     @PostMapping
-    public Menu create(@RequestBody MenuRequest menu) {
-        return menuService.createMenu(menu);
+    public ResponseEntity<Menu> create(@Valid @RequestBody MenuRequest menu) {
+        Menu createdMenu = service.createMenu(menu);
+        return new ResponseEntity<>(createdMenu, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public Menu update(@PathVariable Long id, @RequestBody Menu menu) {
-        return menuService.updateMenu(id, menu);
+    public ResponseEntity<Menu> update(@Valid @PathVariable Long id, @RequestBody MenuRequest menu) {
+        Menu updatedMenu = service.updateMenu(id, menu);
+        return new ResponseEntity<>(updatedMenu, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ObjectNode delete(@PathVariable Long id) {
-        return menuService.deleteMenu(id);
+    public ResponseEntity<Menu> delete(@PathVariable Long id) {
+        Menu deletedMenu = service.deleteMenu(id);
+        return new ResponseEntity<>(deletedMenu, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public Menu getMenuById(@PathVariable Long id) {
-        return menuService.getMenuById(id);
+        return service.getMenuById(id);
     }
 
     @GetMapping("/name/{name}")
     public Menu getMenuByName(@PathVariable String name) {
-        return menuService.getMenuByName(name);
+        return service.getMenuByName(name);
     }
 
     @GetMapping("/category/{category}")
     public List<Menu> getMenuByCategory(@PathVariable String category) {
-        return menuService.getMenuByCategory(category);
+        return service.getMenuByCategory(category);
     }
 
     @GetMapping("/price/{price}")
     public List<Menu> getMenuByPrice(@PathVariable double price) {
-        return menuService.getMenuByPrice(price);
+        return service.getMenuByPrice(price);
     }
 
 }

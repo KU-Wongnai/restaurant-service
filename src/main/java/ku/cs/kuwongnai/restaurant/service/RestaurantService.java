@@ -48,12 +48,10 @@ public class RestaurantService {
         return restaurantRepository.save(record);
     }
 
-    public ObjectNode deleteRestaurant(Long id) {
+    public Restaurant deleteRestaurant(Long id) {
+        Restaurant record = restaurantRepository.findById(id).get();
         restaurantRepository.deleteById(id);
-        ObjectNode response = objectMapper.createObjectNode();
-        response.put("message", "Restaurant ID " + id + " deleted successfully");
-        response.put("success", true);
-        return response;
+        return record;
     }
 
     public Menu createMenu(Long id, MenuRequest menu) {

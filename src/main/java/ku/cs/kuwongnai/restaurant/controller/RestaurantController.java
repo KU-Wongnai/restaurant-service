@@ -1,8 +1,11 @@
 package ku.cs.kuwongnai.restaurant.controller;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import ku.cs.kuwongnai.restaurant.entity.Menu;
 import ku.cs.kuwongnai.restaurant.entity.Restaurant;
+import ku.cs.kuwongnai.restaurant.model.MenuRequest;
 import ku.cs.kuwongnai.restaurant.model.RestaurantRequest;
+import ku.cs.kuwongnai.restaurant.service.MenuService;
 import ku.cs.kuwongnai.restaurant.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,9 @@ public class RestaurantController {
     @Autowired
     private RestaurantService service;
 
+    @Autowired
+    private MenuService menuService;
+
     @PostMapping
     public Restaurant create(@RequestBody RestaurantRequest restaurant) {
         return service.createRestaurant(restaurant);
@@ -31,6 +37,11 @@ public class RestaurantController {
     @DeleteMapping("/{id}")
     public ObjectNode delete(@PathVariable Long id) {
         return service.deleteRestaurant(id);
+    }
+
+    @PostMapping("/{id}")
+    public Menu createMenu(@PathVariable Long id, @RequestBody MenuRequest menu) {
+        return service.createMenu(id, menu);
     }
 
     @GetMapping

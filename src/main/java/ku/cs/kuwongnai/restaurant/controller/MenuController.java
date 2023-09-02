@@ -1,5 +1,6 @@
 package ku.cs.kuwongnai.restaurant.controller;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import ku.cs.kuwongnai.restaurant.entity.Menu;
 import ku.cs.kuwongnai.restaurant.model.MenuRequest;
 import ku.cs.kuwongnai.restaurant.service.MenuService;
@@ -31,7 +32,7 @@ public class MenuController {
     }
 
     @DeleteMapping("/{id}")
-    public Menu delete(@PathVariable Long id) {
+    public ObjectNode delete(@PathVariable Long id) {
         return menuService.deleteMenu(id);
     }
 

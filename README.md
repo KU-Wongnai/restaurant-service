@@ -1,4 +1,4 @@
-# Restaurant Service
+# KU Wongnai - Restaurant Service
 CRUD api for restaurant, restaurant menu and menu options
 
 ## Built With
@@ -29,6 +29,19 @@ Service runs at http://localhost:8092
     "operatingHours" : 3,
     "contactInfo" : "0998765431",
     "rating" : 4.8
+}
+```
+
+### Create Menu
+Create menu for restaurant with the specified id
+> POST -> http://localhost:8092/api/restaurant/{id}
+```json
+{
+  "name" : "Sushi",
+  "description" : "Very delicious",
+  "image" : null,
+  "price" : 250,
+  "category" : "Japanese"
 }
 ```
 
@@ -73,6 +86,7 @@ Service runs at http://localhost:8092
   "category" : "Japanese"
 }
 ```
+Insert `restaurantId` to specify which restaurant this menu belongs to
 
 ### Show All
 > GET -> http://localhost:8092/api/menus

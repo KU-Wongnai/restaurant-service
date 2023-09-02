@@ -1,5 +1,7 @@
 package ku.cs.kuwongnai.restaurant.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import ku.cs.kuwongnai.restaurant.entity.Menu;
 import ku.cs.kuwongnai.restaurant.entity.Restaurant;
 import ku.cs.kuwongnai.restaurant.model.MenuRequest;
@@ -9,9 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.management.modelmbean.ModelMBean;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class MenuService {
@@ -24,6 +24,9 @@ public class MenuService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     public List<Menu> getAllMenus() {
         return menuRepository.findAll();
@@ -47,10 +50,12 @@ public class MenuService {
         return menuRepository.save(record);
     }
 
-    public Menu deleteMenu(Long id) {
-        Menu record = menuRepository.findById(id).get();
+    public ObjectNode deleteMenu(Long id) {
         menuRepository.deleteById(id);
-        return record;
+        ObjectNode response = objectMapper.createObjectNode();
+        response.put("message", "Menu ID " + id + " deleted successfully");
+        response.put("success", true);
+        return response;
     }
 
     public Menu getMenuById(Long id) {

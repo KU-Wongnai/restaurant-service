@@ -1,6 +1,14 @@
 # KU Wongnai - Restaurant Service
 CRUD api for restaurant, restaurant menu and menu options
 
+## Table of Contents
+* [Built With](#built-with)
+* [Setup](#setup)
+* [API](#api)
+* [Restaurant](#restaurant)
+* [Menu](#menu)
+* [Menu Option](#menu-option)
+
 ## Built With
 
 * [![Spring][Spring.io]][Spring-url]
@@ -32,29 +40,26 @@ Service runs at http://localhost:8092
 }
 ```
 
-### Create Menu
-Create menu for restaurant with the specified id
-> POST -> http://localhost:8092/api/restaurant/{id}
-```json
-{
-  "name" : "Sushi",
-  "description" : "Very delicious",
-  "price" : 250,
-  "category" : "Japanese"
-}
-```
-
 ### Show All
 > GET -> http://localhost:8092/api/restaurants
 
 ### Get by ID
-> GET -> http://localhost:8092/api/restaurants/{id}
+> GET -> http://localhost:8092/api/restaurants/{restaurantId}
 
 ### Get by Name
 > GET -> http://localhost:8092/api/restaurants/name/{name}
 
+### Get by Location
+> GET -> http://localhost:8092/api/restaurants/location/{location}
+
+### Get by Food Type
+> GET -> http://localhost:8092/api/restaurants/foodType/{foodType}
+
+### Get by Rating
+> GET -> http://localhost:8092/api/restaurants/rating/{rating}
+
 ### Update
-> PUT -> http://localhost:8092/api/restaurants/{id}
+> PUT -> http://localhost:8092/api/restaurants/{restaurantId}
 ```json
 {
     "name": "Teenoi",
@@ -69,42 +74,32 @@ Create menu for restaurant with the specified id
 ```
 
 ### Delete
-> DELETE -> http://localhost:8092/api/restaurants/{id}
+> DELETE -> http://localhost:8092/api/restaurants/{restaurantId}
 
 ([back to top][readme-top])
 
 ## Menu
+*Make sure to create a restaurant before creating a menu*
 
-### Create
-> POST -> http://localhost:8092/api/menus
+### Create 
+> POST -> http://localhost:8092/api/restaurant/{restaurantId}/menu
 ```json
 {
   "name" : "Sushi",
-  "restaurantId" : 1,
   "description" : "Very delicious",
   "price" : 250,
   "category" : "Japanese"
 }
 ```
-Insert `restaurantId` to specify which restaurant this menu belongs to
 
-### Show All
-> GET -> http://localhost:8092/api/menus
+### Show All menus
+> GET -> http://localhost:8092/api/restaurant/{restaurantId}/menu
 
 ### Get by ID
-> GET -> http://localhost:8092/api/menus/{id}
-
-### Get by Name
-> GET -> http://localhost:8092/api/menus/name/{name}
-
-### Get by Category
-> GET -> http://localhost:8092/api/menus/category/{category}
-
-### Get by Price
-> GET -> http://localhost:8092/api/menus/price/{price}
+> GET -> http://localhost:8092/api/restaurant/{restaurantId}/menu/items/{menuId}
 
 ### Update
-> PUT -> http://localhost:8092/api/restaurants/{id}
+> PUT -> http://localhost:8092/api/restaurant/{restaurantId}/menu/items/{menuId}
 ```json
 {
   "name" : "Sashimi",
@@ -113,10 +108,43 @@ Insert `restaurantId` to specify which restaurant this menu belongs to
   "category" : "Japanese"
 }
 ```
-*Cannot update restaurant id because the menu is not supposed to go to another restaurant*
 
 ### Delete
-> DELETE -> http://localhost:8092/api/menus/{id}
+> DELETE -> http://localhost:8092/api/restaurant/{restaurantId}/menu/items/{menuId}
+
+([back to top][readme-top])
+
+## Menu Option
+*Make sure to create a menu before creating a menu option*
+
+### Create
+> POST -> http://localhost:8092/api/restaurant/{restaurantId}/menu/items/{menuId}/options
+```json
+{
+  "name" : "Cheese",
+  "price" : 10,
+  "category" : "Extra"
+}
+```
+
+### Show All
+> GET -> http://localhost:8092/api/restaurant/{restaurantId}/menu/items/{menuId}/options
+
+### Get by ID
+> GET -> http://localhost:8092/api/restaurant/{restaurantId}/menu/items/{menuId}/options/{menuOptionId}
+
+### Update
+> PUT -> http://localhost:8092/api/restaurant/{restaurantId}/menu/items/{menuId}/options/{menuOptionId}
+```json
+{
+  "name" : "Miso",
+  "price" : 25,
+  "category" : "Extra"
+}
+```
+
+### Delete
+> DELETE -> http://localhost:8092/api/restaurant/{restaurantId}/menu/items/{menuId}/options/{menuOptionId}
 
 ([back to top][readme-top])
 

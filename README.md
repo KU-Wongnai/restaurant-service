@@ -82,7 +82,7 @@ Service runs at http://localhost:8092
 *Make sure to create a restaurant before creating a menu*
 
 ### Create 
-> POST -> http://localhost:8092/api/restaurant/{restaurantId}/menu
+> POST -> http://localhost:8092/api/restaurants/{restaurantId}/menu
 ```json
 {
   "name" : "Sushi",
@@ -92,14 +92,14 @@ Service runs at http://localhost:8092
 }
 ```
 
-### Show All menus
-> GET -> http://localhost:8092/api/restaurant/{restaurantId}/menu
+### Show All Menus
+> GET -> http://localhost:8092/api/restaurants/{restaurantId}/menu
 
 ### Get by ID
-> GET -> http://localhost:8092/api/restaurant/{restaurantId}/menu/items/{menuId}
+> GET -> http://localhost:8092/api/restaurants/{restaurantId}/menu/items/{menuId}
 
 ### Update
-> PUT -> http://localhost:8092/api/restaurant/{restaurantId}/menu/items/{menuId}
+> PUT -> http://localhost:8092/api/restaurants/{restaurantId}/menu/items/{menuId}
 ```json
 {
   "name" : "Sashimi",
@@ -110,7 +110,7 @@ Service runs at http://localhost:8092
 ```
 
 ### Delete
-> DELETE -> http://localhost:8092/api/restaurant/{restaurantId}/menu/items/{menuId}
+> DELETE -> http://localhost:8092/api/restaurants/{restaurantId}/menu/items/{menuId}
 
 ([back to top][readme-top])
 
@@ -118,7 +118,7 @@ Service runs at http://localhost:8092
 *Make sure to create a menu before creating a menu option*
 
 ### Create
-> POST -> http://localhost:8092/api/restaurant/{restaurantId}/menu/items/{menuId}/options
+> POST -> http://localhost:8092/api/restaurants/{restaurantId}/menu/items/{menuId}/options
 ```json
 {
   "name" : "Cheese",
@@ -128,13 +128,13 @@ Service runs at http://localhost:8092
 ```
 
 ### Show All
-> GET -> http://localhost:8092/api/restaurant/{restaurantId}/menu/items/{menuId}/options
+> GET -> http://localhost:8092/api/restaurants/{restaurantId}/menu/items/{menuId}/options
 
 ### Get by ID
-> GET -> http://localhost:8092/api/restaurant/{restaurantId}/menu/items/{menuId}/options/{menuOptionId}
+> GET -> http://localhost:8092/api/restaurants/{restaurantId}/menu/items/{menuId}/options/{menuOptionId}
 
 ### Update
-> PUT -> http://localhost:8092/api/restaurant/{restaurantId}/menu/items/{menuId}/options/{menuOptionId}
+> PUT -> http://localhost:8092/api/restaurants/{restaurantId}/menu/items/{menuId}/options/{menuOptionId}
 ```json
 {
   "name" : "Miso",
@@ -144,7 +144,7 @@ Service runs at http://localhost:8092
 ```
 
 ### Delete
-> DELETE -> http://localhost:8092/api/restaurant/{restaurantId}/menu/items/{menuId}/options/{menuOptionId}
+> DELETE -> http://localhost:8092/api/restaurants/{restaurantId}/menu/items/{menuId}/options/{menuOptionId}
 
 ([back to top][readme-top])
 

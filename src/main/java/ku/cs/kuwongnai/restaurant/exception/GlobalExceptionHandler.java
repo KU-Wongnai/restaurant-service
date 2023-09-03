@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -28,6 +29,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .collect(Collectors.toList());
 
         body.put("errors", errors);
+
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler({InvalidOwnershipException.class})
+    public ResponseEntity<Object> handleInvalidOwnership(InvalidOwnershipException ex) {
+        Map<String, String> body = new HashMap<>();
+
+        String error = ex.getMessage();
+        body.put("status", "error");
+        body.put("error", error);
 
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }

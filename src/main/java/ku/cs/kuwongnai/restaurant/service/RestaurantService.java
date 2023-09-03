@@ -3,6 +3,7 @@ package ku.cs.kuwongnai.restaurant.service;
 import ku.cs.kuwongnai.restaurant.entity.Menu;
 import ku.cs.kuwongnai.restaurant.entity.MenuOption;
 import ku.cs.kuwongnai.restaurant.entity.Restaurant;
+import ku.cs.kuwongnai.restaurant.exception.InvalidOwnershipException;
 import ku.cs.kuwongnai.restaurant.model.MenuOptionRequest;
 import ku.cs.kuwongnai.restaurant.model.MenuRequest;
 import ku.cs.kuwongnai.restaurant.model.RestaurantRequest;
@@ -81,7 +82,7 @@ public class RestaurantService {
 
         // Check if menu belongs to specified restaurant
         if (!record.getRestaurant().getId().equals(restaurantId)) {
-            throw new RuntimeException("This menu doesn't belong to specified restaurant");
+            throw new InvalidOwnershipException("This menu doesn't belong to specified restaurant");
         }
 
         return record;
@@ -127,7 +128,7 @@ public class RestaurantService {
 
         // Check if menu option belongs to specified menu
         if (!record.getMenu().getId().equals(menu.getId())) {
-            throw new RuntimeException("This menu option doesn't belong to specified menu");
+            throw new InvalidOwnershipException("This menu option doesn't belong to specified menu");
         }
 
         return record;

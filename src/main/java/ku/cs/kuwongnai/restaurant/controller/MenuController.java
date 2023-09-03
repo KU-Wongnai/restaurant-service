@@ -3,6 +3,8 @@ package ku.cs.kuwongnai.restaurant.controller;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import jakarta.validation.Valid;
 import ku.cs.kuwongnai.restaurant.entity.Menu;
+import ku.cs.kuwongnai.restaurant.entity.MenuOption;
+import ku.cs.kuwongnai.restaurant.model.MenuOptionRequest;
 import ku.cs.kuwongnai.restaurant.model.MenuRequest;
 import ku.cs.kuwongnai.restaurant.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,12 @@ public class MenuController {
     public ResponseEntity<Menu> delete(@PathVariable Long id) {
         Menu deletedMenu = service.deleteMenu(id);
         return new ResponseEntity<>(deletedMenu, HttpStatus.OK);
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<MenuOption> createMenuOption(@PathVariable Long id, @Valid @RequestBody MenuOptionRequest menuOption) {
+        MenuOption createdMenuOption = service.createMenuOption(id, menuOption);
+        return new ResponseEntity<>(createdMenuOption, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")

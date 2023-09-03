@@ -1,8 +1,11 @@
 package ku.cs.kuwongnai.restaurant.service;
 
 import ku.cs.kuwongnai.restaurant.entity.Menu;
+import ku.cs.kuwongnai.restaurant.entity.MenuOption;
 import ku.cs.kuwongnai.restaurant.entity.Restaurant;
+import ku.cs.kuwongnai.restaurant.model.MenuOptionRequest;
 import ku.cs.kuwongnai.restaurant.model.MenuRequest;
+import ku.cs.kuwongnai.restaurant.repository.MenuOptionRepository;
 import ku.cs.kuwongnai.restaurant.repository.MenuRepository;
 import ku.cs.kuwongnai.restaurant.repository.RestaurantRepository;
 import org.modelmapper.ModelMapper;
@@ -19,6 +22,9 @@ public class MenuService {
 
     @Autowired
     private RestaurantRepository restaurantRepository;
+
+    @Autowired
+    private MenuOptionRepository menuOptionRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -49,6 +55,13 @@ public class MenuService {
         Menu record = menuRepository.findById(id).get();
         menuRepository.deleteById(id);
         return record;
+    }
+
+    public MenuOption createMenuOption(Long id, MenuOptionRequest menuOption) {
+        MenuOption record = modelMapper.map(menuOption, MenuOption.class);
+        Menu menu = menuRepository.findById(id).get();
+        record.setMenu(menu);
+        return menuOptionRepository.save(record);
     }
 
     public Menu getMenuById(Long id) {

@@ -5,9 +5,9 @@ CRUD api for restaurant, restaurant menu and menu options
 * [Built With](#built-with)
 * [Setup](#setup)
 * [API](#api)
-* [Restaurant](#restaurant)
-* [Menu](#menu)
-* [Menu Option](#menu-option)
+  * [Restaurant](#restaurant)
+  * [Menu](#menu)
+  * [Menu Option](#menu-option)
 
 ## Built With
 
@@ -40,25 +40,13 @@ Service runs at http://localhost:8092
 }
 ```
 
-### Show All
+### Show All Restaurants
 > GET -> http://localhost:8092/api/restaurants
 
-### Get by ID
+### Find Restaurant by ID
 > GET -> http://localhost:8092/api/restaurants/{restaurantId}
 
-### Get by Name
-> GET -> http://localhost:8092/api/restaurants/name/{name}
-
-### Get by Location
-> GET -> http://localhost:8092/api/restaurants/location/{location}
-
-### Get by Food Type
-> GET -> http://localhost:8092/api/restaurants/foodType/{foodType}
-
-### Get by Rating
-> GET -> http://localhost:8092/api/restaurants/rating/{rating}
-
-### Update
+### Update Restaurant
 > PUT -> http://localhost:8092/api/restaurants/{restaurantId}
 ```json
 {
@@ -73,7 +61,7 @@ Service runs at http://localhost:8092
 }
 ```
 
-### Delete
+### Delete Restaurant
 > DELETE -> http://localhost:8092/api/restaurants/{restaurantId}
 
 ([back to top][readme-top])
@@ -81,7 +69,7 @@ Service runs at http://localhost:8092
 ## Menu
 *Make sure to create a restaurant before creating a menu*
 
-### Create 
+### Create Menu
 > POST -> http://localhost:8092/api/restaurants/{restaurantId}/menu
 ```json
 {
@@ -95,10 +83,10 @@ Service runs at http://localhost:8092
 ### Show All Menus
 > GET -> http://localhost:8092/api/restaurants/{restaurantId}/menu
 
-### Get by ID
+### Find Menu by ID
 > GET -> http://localhost:8092/api/restaurants/{restaurantId}/menu/items/{menuId}
 
-### Update
+### Update Menu
 > PUT -> http://localhost:8092/api/restaurants/{restaurantId}/menu/items/{menuId}
 ```json
 {
@@ -109,7 +97,7 @@ Service runs at http://localhost:8092
 }
 ```
 
-### Delete
+### Delete Menu
 > DELETE -> http://localhost:8092/api/restaurants/{restaurantId}/menu/items/{menuId}
 
 ([back to top][readme-top])
@@ -117,7 +105,7 @@ Service runs at http://localhost:8092
 ## Menu Option
 *Make sure to create a menu before creating a menu option*
 
-### Create
+### Create Menu Option
 > POST -> http://localhost:8092/api/restaurants/{restaurantId}/menu/items/{menuId}/options
 ```json
 {
@@ -127,13 +115,13 @@ Service runs at http://localhost:8092
 }
 ```
 
-### Show All
+### Show All Menu Options
 > GET -> http://localhost:8092/api/restaurants/{restaurantId}/menu/items/{menuId}/options
 
-### Get by ID
+### Find Menu Option by ID
 > GET -> http://localhost:8092/api/restaurants/{restaurantId}/menu/items/{menuId}/options/{menuOptionId}
 
-### Update
+### Update Menu Option
 > PUT -> http://localhost:8092/api/restaurants/{restaurantId}/menu/items/{menuId}/options/{menuOptionId}
 ```json
 {
@@ -143,7 +131,7 @@ Service runs at http://localhost:8092
 }
 ```
 
-### Delete
+### Delete Menu Option
 > DELETE -> http://localhost:8092/api/restaurants/{restaurantId}/menu/items/{menuId}/options/{menuOptionId}
 
 ([back to top][readme-top])

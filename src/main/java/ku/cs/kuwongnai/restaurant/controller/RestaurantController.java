@@ -124,25 +124,4 @@ public class RestaurantController {
         MenuOption deletedMenuOption = service.deleteMenuOption(restaurantId, menuId, menuOptionId);
         return new ResponseEntity<>(deletedMenuOption, HttpStatus.OK);
     }
-
-    /* ----------------------- For query or filter purposes ----------------------- */
-    @GetMapping("/name/{name}")
-    public Restaurant getRestaurantByName(@PathVariable String name) {
-        return service.getRestaurantByName(name);
-    }
-
-    @GetMapping("/location/{location}")
-    public List<Restaurant> getRestaurantByLocation(@PathVariable String location) {
-        return service.getRestaurantByLocation(location);
-    }
-
-    @GetMapping("/foodType/{foodType}")
-    public List<Restaurant> getRestaurantByFoodType(@PathVariable String foodType) {
-        return service.getRestaurantByFoodType(foodType);
-    }
-
-    @GetMapping("/rating/{rating}")
-    public List<Restaurant> getRestaurantByRating(@PathVariable double rating) {
-        return service.getRestaurantByRating(rating);
-    }
 }

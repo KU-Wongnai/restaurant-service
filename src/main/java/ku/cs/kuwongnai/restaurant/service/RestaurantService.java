@@ -147,21 +147,4 @@ public class RestaurantService {
         menuOptionRepository.deleteById(menuOptionId);
         return record;
     }
-
-    /* ----------------------- For query or filter purposes ----------------------- */
-    public Restaurant getRestaurantByName(String name) {
-        return restaurantRepository.findByName(name);
-    }
-
-    public List<Restaurant> getRestaurantByLocation(String location) {
-        return restaurantRepository.findByLocation(location);
-    }
-
-    public List<Restaurant> getRestaurantByFoodType(String foodType) {
-        return restaurantRepository.findByFoodType(foodType);
-    }
-
-    public List<Restaurant> getRestaurantByRating(double rating) {
-        return restaurantRepository.findByRating(rating);
-    }
 }

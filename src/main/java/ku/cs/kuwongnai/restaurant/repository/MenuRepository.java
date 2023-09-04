@@ -9,8 +9,4 @@ import java.util.UUID;
 
 @Repository
 public interface MenuRepository extends JpaRepository<Menu, Long> {
-    Menu findByName(String name);
-    List<Menu> findByCategory(String category);
-    List<Menu> findByPrice(double price);
-    List<Menu> findByRestaurantId(Long restaurantId);
 }

@@ -9,9 +9,4 @@ import java.util.List;
 
 @Repository
 public interface MenuOptionRepository extends JpaRepository<MenuOption, Long> {
-    MenuOption findByName(String name);
-    List<MenuOption> findByCategory(String category);
-    List<MenuOption> findByPrice(double price);
-    List<MenuOption> findByMenuId(Long menuId);
-
 }

@@ -39,7 +39,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         String error = ex.getMessage();
         body.put("status", "error");
-        body.put("error", error);
+        body.put("message", error);
 
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }

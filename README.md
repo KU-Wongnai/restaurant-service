@@ -15,11 +15,15 @@ CRUD api for restaurant, restaurant menu and menu options
 * [![Spring Boot][Spring.io/spring-boot]][Spring-url]
 
 ## Setup
-1. Clone the repo
+1. Run the following command to start MySQL Server at port 3307.
+    ```sh
+    docker-compose up -d
+    ```
+2. Clone the repo
     ```sh
     git clone https://github.com/KU-Wongnai/restaurant-service.git
     ```
-2. Run `RestaurantApplication.java` to start the service
+3. Run `RestaurantApplication.java` to start the service
 
 ## API
 Service runs at http://localhost:8092

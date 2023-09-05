@@ -15,8 +15,6 @@ public class MenuOptionRequest {
     @Size(min = 3, max = 255)
     private String name;
 
-    private Long menuId; // Foreign key
-
     @NotNull(message = "The price is required.")
     @Positive
     private double price;

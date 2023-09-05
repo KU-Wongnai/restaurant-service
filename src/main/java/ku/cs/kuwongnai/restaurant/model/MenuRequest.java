@@ -18,8 +18,6 @@ public class MenuRequest {
     @Size(min = 6, max = 255)
     private String description;
 
-    private Long restaurantId; // Foreign key
-
     private String image;
 
     @NotNull(message = "The price is required.")

@@ -12,7 +12,9 @@ import ku.cs.kuwongnai.restaurant.repository.MenuRepository;
 import ku.cs.kuwongnai.restaurant.repository.RestaurantRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -41,7 +43,9 @@ public class RestaurantService {
     }
 
     public Restaurant getRestaurantById(Long id) {
-        return restaurantRepository.findById(id).get();
+        return restaurantRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Restaurant not found with given ID = " + id));
     }
 
     public Restaurant updateRestaurant(Long id, RestaurantRequest requestBody) {
@@ -78,7 +82,9 @@ public class RestaurantService {
     }
 
     public Menu getMenuById(Long restaurantId, Long menuId) {
-        Menu record = menuRepository.findById(menuId).get();
+        Menu record = menuRepository.findById(menuId)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Menu not found with given ID = " + menuId));
 
         // Check if menu belongs to specified restaurant
         if (!record.getRestaurant().getId().equals(restaurantId)) {
@@ -121,7 +127,9 @@ public class RestaurantService {
     }
 
     public MenuOption getMenuOptionById(Long restaurantId, Long menuId, Long menuOptionId) {
-        MenuOption record = menuOptionRepository.findById(menuOptionId).get();
+        MenuOption record = menuOptionRepository.findById(menuOptionId)
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Menu option not found with given ID = " + menuOptionId));
 
         // Check if menu belongs to specified restaurant
         Menu menu = getMenuById(restaurantId, menuId);

@@ -1,5 +1,6 @@
 package ku.cs.kuwongnai.restaurant.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -14,6 +15,10 @@ public class Restaurant {
     @Id
     @GeneratedValue
     private Long id;
+
+    @JsonBackReference
+    @ManyToOne
+    private User user;
 
     private String name;
     private String description;

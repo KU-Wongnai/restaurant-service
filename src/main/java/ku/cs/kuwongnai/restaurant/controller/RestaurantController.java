@@ -7,6 +7,7 @@ import ku.cs.kuwongnai.restaurant.entity.Restaurant;
 import ku.cs.kuwongnai.restaurant.model.MenuOptionRequest;
 import ku.cs.kuwongnai.restaurant.model.MenuRequest;
 import ku.cs.kuwongnai.restaurant.model.RestaurantRequest;
+import ku.cs.kuwongnai.restaurant.publisher.RabbitMQPublisher;
 import ku.cs.kuwongnai.restaurant.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,9 @@ public class RestaurantController {
     @Autowired
     private RestaurantService service;
 
+    @Autowired
+    private RabbitMQPublisher publisher;
+
     @GetMapping
     public ResponseEntity<List<Restaurant>> getAllRestaurants() {
         List<Restaurant> restaurants = service.getAllRestaurant();
@@ -31,7 +35,7 @@ public class RestaurantController {
     @PostMapping
     public ResponseEntity<Restaurant> create(@Valid @RequestBody RestaurantRequest restaurant) {
         Restaurant createdRestaurant = service.createRestaurant(restaurant);
-
+        publisher.publishJson("events.restaurant", "restaurant.created", restaurant);
         return new ResponseEntity<>(createdRestaurant, HttpStatus.CREATED);
     }
 
@@ -44,12 +48,14 @@ public class RestaurantController {
     @PutMapping("/{id}")
     public ResponseEntity<Restaurant> update(@PathVariable Long id, @Valid @RequestBody RestaurantRequest restaurant) {
         Restaurant updatedRestaurant = service.updateRestaurant(id, restaurant);
+        publisher.publishJson("events.restaurant", "restaurant.updated", restaurant);
         return new ResponseEntity<>(updatedRestaurant, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Restaurant> delete(@PathVariable Long id) {
         Restaurant deletedRestaurant = service.deleteRestaurant(id);
+        publisher.publishId("events.restaurant", "restaurant.deleted", id);
         return new ResponseEntity<>(deletedRestaurant, HttpStatus.OK);
     }
 

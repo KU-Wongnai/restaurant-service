@@ -22,10 +22,6 @@ public class RestaurantRequest {
     @Size(min = 3, max = 255)
     private String foodType;
 
-    @NotNull(message = "The operating hours is required.")
-    @Positive
-    private int operatingHours;
-
     @Size(min = 3, max = 255)
     private String contactInfo;
 
@@ -34,4 +30,6 @@ public class RestaurantRequest {
     @Positive
     @Max(5)
     private double rating;
+
+    // TODO : Add more attributes
 }

@@ -1,5 +1,6 @@
 package ku.cs.kuwongnai.restaurant.config;
 
+import lombok.Value;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;

@@ -1,4 +1,4 @@
-package ku.cs.kuwongnai.restaurant.messaging;
+package ku.cs.kuwongnai.restaurant.receiver;
 
 import ku.cs.kuwongnai.restaurant.model.UserRequest;
 import ku.cs.kuwongnai.restaurant.service.UserService;
@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserMessageListener {
+public class UserReceiver {
     @Autowired
     private UserService userService;
 

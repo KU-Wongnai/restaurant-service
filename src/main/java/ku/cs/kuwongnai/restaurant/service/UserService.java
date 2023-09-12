@@ -30,7 +30,6 @@ public class UserService {
         record.setName(user.getName());
         record.setEmail(user.getEmail());
         record.setEmailVerifiedAt(user.getEmailVerifiedAt());
-        record.setAvatar(user.getAvatar());
 
         return userRepository.save(record);
     }

@@ -54,7 +54,6 @@ public class RestaurantService {
         record.setLocation(requestBody.getLocation());
         record.setDescription(requestBody.getDescription());
         record.setFoodType(requestBody.getFoodType());
-        record.setOperatingHours(requestBody.getOperatingHours());
         record.setContactInfo(requestBody.getContactInfo());
         record.setImage(requestBody.getImage());
         record.setRating(requestBody.getRating());

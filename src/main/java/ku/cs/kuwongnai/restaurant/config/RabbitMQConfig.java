@@ -38,12 +38,18 @@ public class RabbitMQConfig {
 
     @Bean
     public Binding userCreatedBinding(Queue userCreatedQueue, TopicExchange topic) {
-        return BindingBuilder.bind(userCreatedQueue).to(topic).with(USER_CREATED_ROUTING_KEY);
+        return BindingBuilder
+                .bind(userCreatedQueue)
+                .to(topic)
+                .with(USER_CREATED_ROUTING_KEY);
     }
 
     @Bean
     public Binding userUpdatedBinding(Queue userUpdatedQueue, TopicExchange topic) {
-        return BindingBuilder.bind(userUpdatedQueue).to(topic).with(USER_UPDATED_ROUTING_KEY);
+        return BindingBuilder
+                .bind(userUpdatedQueue)
+                .to(topic)
+                .with(USER_UPDATED_ROUTING_KEY);
     }
 
     @Bean

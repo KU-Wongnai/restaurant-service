@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,8 @@ public class Restaurant {
     private String description;
     private String location;
     private String foodType;
-    private int operatingHours;
+//    private LocalTime openAt;
+//    private LocalTime closeAt;
     private String contactInfo;
     private String image;
     //    private Integer numReviews;
@@ -33,4 +36,8 @@ public class Restaurant {
     @JsonManagedReference
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     List<Menu> menus = new ArrayList<>();
+
+//    public String getOpeningHours()  {
+//        return openAt.toString() + " - " + closeAt.toString();
+//    }
 }

@@ -19,7 +19,6 @@ public class User {
     private String name;
     private String email;
     private LocalDateTime emailVerifiedAt;
-    private String avatar;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

@@ -11,18 +11,20 @@ public class UserReceiver {
     @Autowired
     private UserService userService;
 
-    @RabbitListener(queues = "#{userCreatedQueue.name}")
-    public void handleUserCreatedMessage(UserRequest user) {
-        // Handle user created
-        userService.create(user);
-        System.out.println("From User Service: User has been created");
+    // TODO : Fix SimpleMessageListenerContainer error
 
-    }
-
-    @RabbitListener(queues = "#{userUpdatedQueue.name}")
-    public void handleUserUpdatedMessage(UserRequest user) {
-        // Handle user updated message
-        userService.update(user);
-        System.out.println("From User Service: User has been updated");
-    }
+//    @RabbitListener(queues = "#{userCreatedQueue.name}")
+//    public void handleUserCreatedMessage(UserRequest user) {
+//        // Handle user created
+//        userService.create(user);
+//        System.out.println("From User Service: User has been created");
+//
+//    }
+//
+//    @RabbitListener(queues = "#{userUpdatedQueue.name}")
+//    public void handleUserUpdatedMessage(UserRequest user) {
+//        // Handle user updated message
+//        userService.update(user);
+//        System.out.println("From User Service: User has been updated");
+//    }
 }

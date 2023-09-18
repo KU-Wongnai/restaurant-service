@@ -35,7 +35,7 @@ public class RestaurantController {
     @PostMapping
     public ResponseEntity<Restaurant> create(@Valid @RequestBody RestaurantRequest restaurant) {
         Restaurant createdRestaurant = service.createRestaurant(restaurant);
-        publisher.publishJson("events.restaurant", "restaurant.created", restaurant);
+        publisher.publishJson("events.restaurant", "restaurant.created", createdRestaurant);
         return new ResponseEntity<>(createdRestaurant, HttpStatus.CREATED);
     }
 
@@ -48,7 +48,7 @@ public class RestaurantController {
     @PutMapping("/{id}")
     public ResponseEntity<Restaurant> update(@PathVariable Long id, @Valid @RequestBody RestaurantRequest restaurant) {
         Restaurant updatedRestaurant = service.updateRestaurant(id, restaurant);
-        publisher.publishJson("events.restaurant", "restaurant.updated", restaurant);
+        publisher.publishJson("events.restaurant", "restaurant.updated", updatedRestaurant);
         return new ResponseEntity<>(updatedRestaurant, HttpStatus.OK);
     }
 
@@ -81,7 +81,7 @@ public class RestaurantController {
 
     @PutMapping("/{restaurantId}/menu/items/{menuId}")
     public ResponseEntity<Menu> updateMenu(@PathVariable Long restaurantId, @PathVariable Long menuId,
-                                           @Valid @RequestBody MenuRequest menu) {
+            @Valid @RequestBody MenuRequest menu) {
         Menu updatedMenu = service.updateMenu(restaurantId, menuId, menu);
         return new ResponseEntity<>(updatedMenu, HttpStatus.OK);
     }
@@ -96,37 +96,37 @@ public class RestaurantController {
 
     @GetMapping("/{restaurantId}/menu/items/{menuId}/options")
     public ResponseEntity<List<MenuOption>> getMenuOptions(@PathVariable Long restaurantId,
-                                                           @PathVariable Long menuId) {
+            @PathVariable Long menuId) {
         List<MenuOption> menuOptions = service.getMenuOptions(restaurantId, menuId);
         return new ResponseEntity<>(menuOptions, HttpStatus.OK);
     }
 
     @PostMapping("/{restaurantId}/menu/items/{menuId}/options")
     public ResponseEntity<MenuOption> createMenuOption(@PathVariable Long restaurantId, @PathVariable Long menuId,
-                                                 @Valid @RequestBody MenuOptionRequest menuOption) {
+            @Valid @RequestBody MenuOptionRequest menuOption) {
         MenuOption createdMenuOption = service.createMenuOption(restaurantId, menuId, menuOption);
         return new ResponseEntity<>(createdMenuOption, HttpStatus.CREATED);
     }
 
     @GetMapping("/{restaurantId}/menu/items/{menuId}/options/{menuOptionId}")
     public ResponseEntity<MenuOption> getMenuOptionById(@PathVariable Long restaurantId,
-                                                           @PathVariable Long menuId,
-                                                        @PathVariable Long menuOptionId) {
+            @PathVariable Long menuId,
+            @PathVariable Long menuOptionId) {
         MenuOption menuOption = service.getMenuOptionById(restaurantId, menuId, menuOptionId);
         return new ResponseEntity<>(menuOption, HttpStatus.OK);
     }
 
     @PutMapping("/{restaurantId}/menu/items/{menuId}/options/{menuOptionId}")
     public ResponseEntity<MenuOption> updateMenuOption(@PathVariable Long restaurantId, @PathVariable Long menuId,
-                                                       @PathVariable Long menuOptionId,
-                                           @Valid @RequestBody MenuOptionRequest menuOption) {
+            @PathVariable Long menuOptionId,
+            @Valid @RequestBody MenuOptionRequest menuOption) {
         MenuOption updatedMenuOption = service.updateMenuOption(restaurantId, menuId, menuOptionId, menuOption);
         return new ResponseEntity<>(updatedMenuOption, HttpStatus.OK);
     }
 
     @DeleteMapping("/{restaurantId}/menu/items/{menuId}/options/{menuOptionId}")
     public ResponseEntity<MenuOption> deleteMenuOption(@PathVariable Long restaurantId, @PathVariable Long menuId,
-                                                       @PathVariable Long menuOptionId) {
+            @PathVariable Long menuOptionId) {
         MenuOption deletedMenuOption = service.deleteMenuOption(restaurantId, menuId, menuOptionId);
         return new ResponseEntity<>(deletedMenuOption, HttpStatus.OK);
     }

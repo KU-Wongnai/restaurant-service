@@ -1,5 +1,6 @@
 package ku.cs.kuwongnai.restaurant.publisher;
 
+import ku.cs.kuwongnai.restaurant.entity.Restaurant;
 import ku.cs.kuwongnai.restaurant.model.RestaurantRequest;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
@@ -12,12 +13,12 @@ public class RabbitMQPublisher {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void publishJson(String exchange, String routingKey, RestaurantRequest restaurant){
+    public void publishJson(String exchange, String routingKey, Restaurant restaurant) {
         System.out.println("Message sent -> " + restaurant.toString());
         rabbitTemplate.convertAndSend(exchange, routingKey, restaurant);
     }
 
-    public void publishId(String exchange, String routingKey, Long id){
+    public void publishId(String exchange, String routingKey, Long id) {
         System.out.println("Message sent ID: " + id);
         rabbitTemplate.convertAndSend(exchange, routingKey, id);
     }

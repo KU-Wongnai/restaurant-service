@@ -11,8 +11,6 @@ public class UserReceiver {
     @Autowired
     private UserService userService;
 
-    // TODO : Fix SimpleMessageListenerContainer error
-
     @RabbitListener(queues = "#{userCreatedQueue.name}")
     public void handleUserCreatedMessage(UserRequest user) {
         // Handle user created

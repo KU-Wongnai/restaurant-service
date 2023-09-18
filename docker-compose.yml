@@ -2,7 +2,7 @@ version: "3.9"
 services:
   mysql:
     image: mysql
-    container_name: mysql
+    # container_name: mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -16,14 +16,14 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
+    # container_name: phpmyadmin
     restart: always
     environment:
       PMA_HOST: mysql
       PMA_PORT: 3306
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - 8080:80
+      - 8081:80
     depends_on:
       - mysql
 

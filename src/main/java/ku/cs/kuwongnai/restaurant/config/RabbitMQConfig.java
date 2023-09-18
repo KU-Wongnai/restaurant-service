@@ -16,8 +16,8 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 @Configuration
 public class RabbitMQConfig {
 
-    private final String USER_CREATED_QUEUE = "user.created.queue";
-    private final String USER_UPDATED_QUEUE = "user.updated.queue";
+    private final String USER_CREATED_QUEUE = "restaurant.user.created.queue";
+    private final String USER_UPDATED_QUEUE = "restaurant.user.updated.queue";
     private final String TOPIC_EXCHANGE_NAME = "events.user";
     private final String USER_CREATED_ROUTING_KEY = "user.created";
     private final String USER_UPDATED_ROUTING_KEY = "user.updated";

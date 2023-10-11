@@ -5,6 +5,7 @@ import ku.cs.kuwongnai.restaurant.entity.Menu;
 import ku.cs.kuwongnai.restaurant.entity.MenuOption;
 import ku.cs.kuwongnai.restaurant.entity.Restaurant;
 import ku.cs.kuwongnai.restaurant.model.MenuOptionRequest;
+import ku.cs.kuwongnai.restaurant.model.MenuPublish;
 import ku.cs.kuwongnai.restaurant.model.MenuRequest;
 import ku.cs.kuwongnai.restaurant.model.RestaurantRequest;
 import ku.cs.kuwongnai.restaurant.publisher.RabbitMQPublisher;
@@ -70,6 +71,12 @@ public class RestaurantController {
     @PostMapping("/{id}/menu")
     public ResponseEntity<Menu> createMenu(@PathVariable Long id, @Valid @RequestBody MenuRequest menu) {
         Menu createdMenu = service.createMenu(id, menu);
+
+        MenuPublish menuPublish = new MenuPublish(createdMenu);
+        menuPublish.setRestaurantId(id);
+
+        publisher.publishMenuJson("events.menu", "menu.created", menuPublish);
+
         return new ResponseEntity<>(createdMenu, HttpStatus.CREATED);
     }
 
@@ -83,12 +90,18 @@ public class RestaurantController {
     public ResponseEntity<Menu> updateMenu(@PathVariable Long restaurantId, @PathVariable Long menuId,
             @Valid @RequestBody MenuRequest menu) {
         Menu updatedMenu = service.updateMenu(restaurantId, menuId, menu);
+
+        MenuPublish menuPublish = new MenuPublish(updatedMenu);
+        menuPublish.setRestaurantId(restaurantId);
+
+        publisher.publishMenuJson("events.menu", "menu.updated", menuPublish);
         return new ResponseEntity<>(updatedMenu, HttpStatus.OK);
     }
 
     @DeleteMapping("/{restaurantId}/menu/items/{menuId}")
     public ResponseEntity<Menu> deleteMenu(@PathVariable Long restaurantId, @PathVariable Long menuId) {
         Menu deletedMenu = service.deleteMenu(restaurantId, menuId);
+        publisher.publishId("events.menu", "menu.deleted", menuId);
         return new ResponseEntity<>(deletedMenu, HttpStatus.OK);
     }
 

@@ -26,18 +26,18 @@ public class Restaurant {
     private String description;
     private String location;
     private String foodType;
-//    private LocalTime openAt;
-//    private LocalTime closeAt;
+    // private LocalTime openAt;
+    // private LocalTime closeAt;
     private String contactInfo;
     private String image;
-    //    private Integer numReviews;
+    // private Integer numReviews;
     private double rating;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     List<Menu> menus = new ArrayList<>();
 
-//    public String getOpeningHours()  {
-//        return openAt.toString() + " - " + closeAt.toString();
-//    }
+    // public String getOpeningHours() {
+    // return openAt.toString() + " - " + closeAt.toString();
+    // }
 }

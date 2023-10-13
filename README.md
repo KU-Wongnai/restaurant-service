@@ -21,7 +21,7 @@ CRUD api for restaurant, restaurant menu and menu options
     ```
 2. Copy `.env.example` to `.env` and change the value to your environment.
     ```sh
-    cp .env .env.example
+    cp .env.example .env
     ``` 
    In your `.env` file add your jwt key to `JWT_SECRET` which should come from user-service
     ```sh
@@ -34,6 +34,9 @@ CRUD api for restaurant, restaurant menu and menu options
     ```
 
 4. Run `RestaurantApplication.java` to start the service
+    ```sh
+    mvn spring-boot:run
+    ```
 
 ## API
 Service runs at http://localhost:8092

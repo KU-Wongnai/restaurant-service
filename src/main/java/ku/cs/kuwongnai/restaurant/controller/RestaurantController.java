@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import ku.cs.kuwongnai.restaurant.entity.Menu;
 import ku.cs.kuwongnai.restaurant.entity.MenuOption;
 import ku.cs.kuwongnai.restaurant.entity.Restaurant;
+import ku.cs.kuwongnai.restaurant.model.MenuOptionPublish;
 import ku.cs.kuwongnai.restaurant.model.MenuOptionRequest;
 import ku.cs.kuwongnai.restaurant.model.MenuPublish;
 import ku.cs.kuwongnai.restaurant.model.MenuRequest;
@@ -118,6 +119,15 @@ public class RestaurantController {
     public ResponseEntity<MenuOption> createMenuOption(@PathVariable Long restaurantId, @PathVariable Long menuId,
             @Valid @RequestBody MenuOptionRequest menuOption) {
         MenuOption createdMenuOption = service.createMenuOption(restaurantId, menuId, menuOption);
+
+        MenuOptionPublish menuOptionPublish = new MenuOptionPublish();
+        menuOptionPublish.setMenuId(menuId);
+        menuOptionPublish.setName(createdMenuOption.getName());
+        menuOptionPublish.setPrice(createdMenuOption.getPrice());
+        menuOptionPublish.setCategory(createdMenuOption.getCategory());
+        menuOptionPublish.setId(createdMenuOption.getId());
+
+        publisher.publishMenuOptionJson("events.menuOption", "menuOption.created", menuOptionPublish);
         return new ResponseEntity<>(createdMenuOption, HttpStatus.CREATED);
     }
 
@@ -134,6 +144,14 @@ public class RestaurantController {
             @PathVariable Long menuOptionId,
             @Valid @RequestBody MenuOptionRequest menuOption) {
         MenuOption updatedMenuOption = service.updateMenuOption(restaurantId, menuId, menuOptionId, menuOption);
+        MenuOptionPublish menuOptionPublish = new MenuOptionPublish();
+        menuOptionPublish.setMenuId(menuId);
+        menuOptionPublish.setName(updatedMenuOption.getName());
+        menuOptionPublish.setPrice(updatedMenuOption.getPrice());
+        menuOptionPublish.setCategory(updatedMenuOption.getCategory());
+        menuOptionPublish.setId(updatedMenuOption.getId());
+
+        publisher.publishMenuOptionJson("events.menuOption", "menuOption.created", menuOptionPublish);
         return new ResponseEntity<>(updatedMenuOption, HttpStatus.OK);
     }
 
@@ -141,6 +159,7 @@ public class RestaurantController {
     public ResponseEntity<MenuOption> deleteMenuOption(@PathVariable Long restaurantId, @PathVariable Long menuId,
             @PathVariable Long menuOptionId) {
         MenuOption deletedMenuOption = service.deleteMenuOption(restaurantId, menuId, menuOptionId);
+        publisher.publishId("events.menuOption", "menuOption.deleted", menuOptionId);
         return new ResponseEntity<>(deletedMenuOption, HttpStatus.OK);
     }
 }

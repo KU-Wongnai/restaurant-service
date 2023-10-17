@@ -1,6 +1,7 @@
 package ku.cs.kuwongnai.restaurant.publisher;
 
 import ku.cs.kuwongnai.restaurant.entity.Restaurant;
+import ku.cs.kuwongnai.restaurant.model.MenuOptionPublish;
 import ku.cs.kuwongnai.restaurant.model.MenuPublish;
 import ku.cs.kuwongnai.restaurant.model.RestaurantRequest;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -20,6 +21,11 @@ public class RabbitMQPublisher {
     }
 
     public void publishMenuJson(String exchange, String routingKey, MenuPublish menu) {
+        // System.out.println(menu);
+        rabbitTemplate.convertAndSend(exchange, routingKey, menu);
+    }
+
+    public void publishMenuOptionJson(String exchange, String routingKey, MenuOptionPublish menu) {
         // System.out.println(menu);
         rabbitTemplate.convertAndSend(exchange, routingKey, menu);
     }

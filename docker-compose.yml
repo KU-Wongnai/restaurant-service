@@ -13,16 +13,6 @@ services:
       - 3308:3306
     volumes:
       - db_data:/var/lib/mysql
-  rabbitmq:
-    image: "rabbitmq:3-management"
-    ports:
-      - "5673:5672" # RabbitMQ default port for AMQP
-      - "15672:15672" # RabbitMQ Management Console
-    environment:
-      RABBITMQ_DEFAULT_USER: user
-      RABBITMQ_DEFAULT_PASS: password
-    networks:
-      - user-service_sail
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin

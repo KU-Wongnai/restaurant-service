@@ -1,35 +1,25 @@
 version: "3.9"
 services:
-  mysql:
-    image: mysql
-    # container_name: mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: restaurant
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+  restaurant_service_server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: restaurant_service_server
+    restart: on-failure
     ports:
-      - 3308:3306
-    volumes:
-      - db_data:/var/lib/mysql
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    # container_name: phpmyadmin
-    restart: always
+      - 8092:8092
     environment:
-      PMA_HOST: mysql
-      PMA_PORT: 3306
-      MYSQL_ROOT_PASSWORD: root
-    ports:
-      - 8081:80
-    depends_on:
-      - mysql
-
-volumes:
-  db_data:
+      SPRING_DATASOURCE_URL: "${SPRING_DATASOURCE_URL:-jdbc:mysql://mysql:3306/restaurant_service}"
+      SPRING_DATASOURCE_USERNAME: "${SPRING_DATASOURCE_USERNAME:-root}"
+      SPRING_DATASOURCE_PASSWORD: "${SPRING_DATASOURCE_PASSWORD:-root}"
+      SPRING_RABBITMQ_HOST: "${RABBITMQ_HOST:-rabbitmq}"
+      SPRING_RABBITMQ_PORT: "${RABBITMQ_PORT:-5672}"
+      SPRING_RABBITMQ_USERNAME: "${RABBITMQ_USERNAME:-user}"
+      SPRING_RABBITMQ_PASSWORD: "${RABBITMQ_PASSWORD:-password}"
+      JWT_SECRET: ${JWT_SECRET}
+    networks:
+      - ku-wongnai_ku-wongnai
 
 networks:
-  user-service_sail:
+  ku-wongnai_ku-wongnai:
     external: true

@@ -1,7 +1,10 @@
 package ku.cs.kuwongnai.restaurant.model;
 
 import jakarta.validation.constraints.*;
+import ku.cs.kuwongnai.restaurant.common.RestaurantCategory;
 import lombok.Data;
+
+import java.util.List;
 
 /**
  * DTO Class for Menu
@@ -18,9 +21,9 @@ public class RestaurantRequest {
     @Size(min = 3, max = 255)
     private String location;
 
-    @NotBlank(message = "The food type is required.")
+    @NotBlank(message = "The food categories is required.")
     @Size(min = 3, max = 255)
-    private String foodType;
+    private List<RestaurantCategory> categories;
 
     @Size(min = 3, max = 255)
     private String contactInfo;

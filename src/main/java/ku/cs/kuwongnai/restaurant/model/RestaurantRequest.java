@@ -21,8 +21,9 @@ public class RestaurantRequest {
     @Size(min = 3, max = 255)
     private String location;
 
-    @NotBlank(message = "The food categories is required.")
-    @Size(min = 3, max = 255)
+    // @NotBlank(message = "The food categories is required.")
+    // @Size(min = 3, max = 255)
+    @NotEmpty(message = "The food categories is required.")
     private List<RestaurantCategory> categories;
 
     @Size(min = 3, max = 255)

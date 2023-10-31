@@ -53,7 +53,7 @@ public class RestaurantService {
         record.setName(requestBody.getName());
         record.setLocation(requestBody.getLocation());
         record.setDescription(requestBody.getDescription());
-        record.setFoodType(requestBody.getFoodType());
+        record.setCategories(requestBody.getCategories());
         record.setContactInfo(requestBody.getContactInfo());
         record.setImage(requestBody.getImage());
         record.setRating(requestBody.getRating());
@@ -141,7 +141,8 @@ public class RestaurantService {
         return record;
     }
 
-    public MenuOption updateMenuOption(Long restaurantId, Long menuId, Long menuOptionId, MenuOptionRequest requestBody) {
+    public MenuOption updateMenuOption(Long restaurantId, Long menuId, Long menuOptionId,
+            MenuOptionRequest requestBody) {
         MenuOption record = getMenuOptionById(restaurantId, menuId, menuOptionId);
         record.setName(requestBody.getName());
         record.setPrice(requestBody.getPrice());

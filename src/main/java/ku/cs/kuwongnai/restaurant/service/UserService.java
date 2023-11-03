@@ -5,7 +5,9 @@ import ku.cs.kuwongnai.restaurant.model.UserRequest;
 import ku.cs.kuwongnai.restaurant.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class UserService {
@@ -21,7 +23,13 @@ public class UserService {
     }
 
     public User getById(Long id) {
-        return userRepository.findById(id).orElse(null);
+        User user = userRepository.findById(id).orElse(null);
+
+        if (user == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User with the given id not found.");
+        }
+
+        return user;
     }
 
     public User update(UserRequest user) {

@@ -3,6 +3,7 @@ package ku.cs.kuwongnai.restaurant.service;
 import ku.cs.kuwongnai.restaurant.entity.Menu;
 import ku.cs.kuwongnai.restaurant.entity.MenuOption;
 import ku.cs.kuwongnai.restaurant.entity.Restaurant;
+import ku.cs.kuwongnai.restaurant.entity.User;
 import ku.cs.kuwongnai.restaurant.exception.InvalidOwnershipException;
 import ku.cs.kuwongnai.restaurant.model.MenuOptionRequest;
 import ku.cs.kuwongnai.restaurant.model.MenuRequest;
@@ -10,6 +11,7 @@ import ku.cs.kuwongnai.restaurant.model.RestaurantRequest;
 import ku.cs.kuwongnai.restaurant.repository.MenuOptionRepository;
 import ku.cs.kuwongnai.restaurant.repository.MenuRepository;
 import ku.cs.kuwongnai.restaurant.repository.RestaurantRepository;
+import ku.cs.kuwongnai.restaurant.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +30,12 @@ public class RestaurantService {
     private MenuRepository menuRepository;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private MenuOptionRepository menuOptionRepository;
+
+
 
     @Autowired
     private ModelMapper modelMapper;
@@ -37,8 +44,10 @@ public class RestaurantService {
         return restaurantRepository.findAll();
     }
 
-    public Restaurant createRestaurant(RestaurantRequest restaurant) {
+    public Restaurant createRestaurant(RestaurantRequest restaurant, Long userId) {
         Restaurant record = modelMapper.map(restaurant, Restaurant.class);
+        User user = userService.getById(userId);
+        record.setUser(user);
         return restaurantRepository.save(record);
     }
 
@@ -54,15 +63,23 @@ public class RestaurantService {
         record.setLocation(requestBody.getLocation());
         record.setDescription(requestBody.getDescription());
         record.setCategories(requestBody.getCategories());
-        record.setContactInfo(requestBody.getContactInfo());
+        record.setPhone(requestBody.getPhone());
         record.setImage(requestBody.getImage());
-        record.setRating(requestBody.getRating());
         return restaurantRepository.save(record);
     }
 
-    public Restaurant deleteRestaurant(Long id) {
+    public Restaurant deleteRestaurant(Long id, Long userId) {
+
+        // Get the restaurant by its ID
         Restaurant record = getRestaurantById(id);
+
+        // Check if the user is the owner of the restaurant.
+        if (record.getUser().getId() != userId) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not the owner of the restaurant.");
+        }
+
         restaurantRepository.deleteById(id);
+
         return record;
     }
 

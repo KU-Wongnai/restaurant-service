@@ -14,6 +14,8 @@ import ku.cs.kuwongnai.restaurant.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,8 +37,10 @@ public class RestaurantController {
     }
 
     @PostMapping
-    public ResponseEntity<Restaurant> create(@Valid @RequestBody RestaurantRequest restaurant) {
-        Restaurant createdRestaurant = service.createRestaurant(restaurant);
+    public ResponseEntity<Restaurant> create(@Valid @RequestBody RestaurantRequest restaurant,
+                                             @AuthenticationPrincipal Jwt jwt) {
+        String userId = (String) jwt.getClaims().get("sub");
+        Restaurant createdRestaurant = service.createRestaurant(restaurant, Long.parseLong(userId));
         publisher.publishJson("events.restaurant", "restaurant.created", createdRestaurant);
         return new ResponseEntity<>(createdRestaurant, HttpStatus.CREATED);
     }
@@ -55,8 +59,10 @@ public class RestaurantController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Restaurant> delete(@PathVariable Long id) {
-        Restaurant deletedRestaurant = service.deleteRestaurant(id);
+    public ResponseEntity<Restaurant> delete(@PathVariable Long id,
+                                             @AuthenticationPrincipal Jwt jwt) {
+        String userId = (String) jwt.getClaims().get("sub");
+        Restaurant deletedRestaurant = service.deleteRestaurant(id, Long.parseLong(userId));
         publisher.publishId("events.restaurant", "restaurant.deleted", id);
         return new ResponseEntity<>(deletedRestaurant, HttpStatus.OK);
     }

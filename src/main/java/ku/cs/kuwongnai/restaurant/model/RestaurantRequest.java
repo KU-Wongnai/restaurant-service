@@ -4,6 +4,7 @@ import jakarta.validation.constraints.*;
 import ku.cs.kuwongnai.restaurant.common.RestaurantCategory;
 import lombok.Data;
 
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -15,25 +16,35 @@ public class RestaurantRequest {
     @Size(min = 3, max = 255)
     private String name;
 
-    @Size(min = 7, max = 255)
+    @Size(min = 3, max = 255)
     private String description;
 
+    @NotBlank(message = "The location is required.")
     @Size(min = 3, max = 255)
     private String location;
 
-    // @NotBlank(message = "The food categories is required.")
-    // @Size(min = 3, max = 255)
+    @Size(min = 3, max = 20)
+    private String dayAvailable;
+
+    @Size(min = 3, max = 20)
+    private String openAt;
+
+    @Size(min = 3, max = 20)
+    private String closeAt;
+
     @NotEmpty(message = "The food categories is required.")
+    @Size(max = 5)
     private List<RestaurantCategory> categories;
 
-    @Size(min = 3, max = 255)
-    private String contactInfo;
+    @Size(min = 8, max = 11)
+    private String phone;
 
     private String image;
 
-    @Positive
-    @Max(5)
-    private double rating;
+    @Size(min = 3, max = 20)
+    private int minPrice;
+    @Size(min = 3, max = 20)
+    private int maxPrice;
 
     // TODO : Add more attributes
 }

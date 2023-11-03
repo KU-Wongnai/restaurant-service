@@ -5,15 +5,14 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Positive;
+import ku.cs.kuwongnai.restaurant.common.Day;
 import ku.cs.kuwongnai.restaurant.common.RestaurantCategory;
 import ku.cs.kuwongnai.restaurant.common.RestaurantStatus;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,25 +32,39 @@ public class Restaurant {
     private String description;
     private String location;
     private List<RestaurantCategory> categories;
-    private RestaurantStatus status;
     private String dayAvailable;
     private String openAt;
     private String closeAt;
-    private String phone;
+    private RestaurantStatus status = RestaurantStatus.PENDING;
+    private String contactInfo;
     private String image;
-    private int minPrice;
-    private int maxPrice;
 
     @Positive
     @Max(5)
     private double rating;
+
+    private Boolean isDelivery;
+    private Boolean isWalkIn;
+
+    private int minPrice;
+    private int maxPrice;
+    private String priceRange;
+
+    // Contact info
+    private String email;
+    private String phone;
+    private String facebook;
+    private String line;
+    private String instagram;
+    private String website;
+
+    private List<Day> openDays;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
 
     @JsonManagedReference
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)

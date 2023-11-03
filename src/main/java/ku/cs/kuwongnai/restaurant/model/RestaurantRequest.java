@@ -1,10 +1,10 @@
 package ku.cs.kuwongnai.restaurant.model;
 
 import jakarta.validation.constraints.*;
+import ku.cs.kuwongnai.restaurant.common.Day;
 import ku.cs.kuwongnai.restaurant.common.RestaurantCategory;
 import lombok.Data;
 
-import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -45,6 +45,23 @@ public class RestaurantRequest {
     private int minPrice;
     @Size(min = 3, max = 20)
     private int maxPrice;
+    private Boolean isDelivery;
+    private Boolean isWalkIn;
+
+    private String priceRange;
+
+    @Email
+    private String email;
+    private String facebook;
+    private String line;
+    private String instagram;
+    private String website;
+
+    private List<Day> openDays;
+
+    // @Positive
+    // @Max(5)
+    // private double rating;
 
     // TODO : Add more attributes
 }

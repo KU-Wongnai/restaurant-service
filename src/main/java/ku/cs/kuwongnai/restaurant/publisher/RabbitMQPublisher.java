@@ -15,7 +15,7 @@ public class RabbitMQPublisher {
     }
 
     public void publishJson(String exchange, String routingKey, Restaurant restaurant) {
-        System.out.println("Message sent -> " + restaurant.toString());
+        // System.out.println("Message sent -> " + restaurant.toString());
         rabbitTemplate.convertAndSend(exchange, routingKey, restaurant);
     }
 

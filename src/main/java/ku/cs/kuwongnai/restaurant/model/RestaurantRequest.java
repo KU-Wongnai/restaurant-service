@@ -41,9 +41,9 @@ public class RestaurantRequest {
 
     private String image;
 
-    @Size(min = 3, max = 20)
+    // @Size(min = 3, max = 20)
     private int minPrice;
-    @Size(min = 3, max = 20)
+    // @Size(min = 3, max = 20)
     private int maxPrice;
     private Boolean isDelivery;
     private Boolean isWalkIn;

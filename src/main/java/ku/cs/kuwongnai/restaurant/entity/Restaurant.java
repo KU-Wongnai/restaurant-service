@@ -39,8 +39,8 @@ public class Restaurant {
     private String contactInfo;
     private String image;
 
-    @Positive
-    @Max(5)
+    // @Positive
+    // @Max(5)
     private double rating;
 
     private Boolean isDelivery;

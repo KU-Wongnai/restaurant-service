@@ -11,7 +11,6 @@ import ku.cs.kuwongnai.restaurant.model.RestaurantRequest;
 import ku.cs.kuwongnai.restaurant.repository.MenuOptionRepository;
 import ku.cs.kuwongnai.restaurant.repository.MenuRepository;
 import ku.cs.kuwongnai.restaurant.repository.RestaurantRepository;
-import ku.cs.kuwongnai.restaurant.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,8 +33,6 @@ public class RestaurantService {
 
     @Autowired
     private MenuOptionRepository menuOptionRepository;
-
-
 
     @Autowired
     private ModelMapper modelMapper;
@@ -65,6 +62,7 @@ public class RestaurantService {
         record.setCategories(requestBody.getCategories());
         record.setPhone(requestBody.getPhone());
         record.setImage(requestBody.getImage());
+        // record.setRating(requestBody.getRating());
         return restaurantRepository.save(record);
     }
 

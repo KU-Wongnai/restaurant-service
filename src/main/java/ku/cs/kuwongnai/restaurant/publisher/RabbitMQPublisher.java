@@ -3,7 +3,6 @@ package ku.cs.kuwongnai.restaurant.publisher;
 import ku.cs.kuwongnai.restaurant.entity.Restaurant;
 import ku.cs.kuwongnai.restaurant.model.MenuOptionPublish;
 import ku.cs.kuwongnai.restaurant.model.MenuPublish;
-import ku.cs.kuwongnai.restaurant.model.RestaurantRequest;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 

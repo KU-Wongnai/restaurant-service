@@ -65,7 +65,7 @@ public class RestaurantController {
         return new ResponseEntity<>(acceptedRestaurant, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}/accept")
+    @PutMapping("/{id}/decline")
     public ResponseEntity<Restaurant> decline(@PathVariable Long id) {
         Restaurant declinedRestaurant = service.declineRestaurant(id);
         publisher.publishJson("events.restaurant", "restaurant.updated", declinedRestaurant);

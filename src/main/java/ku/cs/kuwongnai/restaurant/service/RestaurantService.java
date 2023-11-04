@@ -76,6 +76,18 @@ public class RestaurantService {
         return restaurantRepository.save(record);
     }
 
+    public Restaurant acceptRestaurant(Long id) {
+        Restaurant record = getRestaurantById(id);
+        record.setStatus(RestaurantStatus.ACCEPTED);
+        return restaurantRepository.save(record);
+    }
+
+    public Restaurant declineRestaurant(Long id) {
+        Restaurant record = getRestaurantById(id);
+        record.setStatus(RestaurantStatus.DECLINED);
+        return restaurantRepository.save(record);
+    }
+
     public Restaurant deleteRestaurant(Long id, Long userId) {
 
         // Get the restaurant by its ID

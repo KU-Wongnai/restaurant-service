@@ -58,6 +58,20 @@ public class RestaurantController {
         return new ResponseEntity<>(updatedRestaurant, HttpStatus.OK);
     }
 
+    @PutMapping("/{id}/accept")
+    public ResponseEntity<Restaurant> accept(@PathVariable Long id) {
+        Restaurant acceptedRestaurant = service.acceptRestaurant(id);
+        publisher.publishJson("events.restaurant", "restaurant.updated", acceptedRestaurant);
+        return new ResponseEntity<>(acceptedRestaurant, HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}/accept")
+    public ResponseEntity<Restaurant> decline(@PathVariable Long id) {
+        Restaurant declinedRestaurant = service.declineRestaurant(id);
+        publisher.publishJson("events.restaurant", "restaurant.updated", declinedRestaurant);
+        return new ResponseEntity<>(declinedRestaurant, HttpStatus.OK);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Restaurant> delete(@PathVariable Long id,
                                              @AuthenticationPrincipal Jwt jwt) {

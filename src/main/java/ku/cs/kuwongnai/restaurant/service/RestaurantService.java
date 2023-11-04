@@ -1,5 +1,6 @@
 package ku.cs.kuwongnai.restaurant.service;
 
+import ku.cs.kuwongnai.restaurant.common.RestaurantStatus;
 import ku.cs.kuwongnai.restaurant.entity.Menu;
 import ku.cs.kuwongnai.restaurant.entity.MenuOption;
 import ku.cs.kuwongnai.restaurant.entity.Restaurant;
@@ -43,8 +44,17 @@ public class RestaurantService {
 
     public Restaurant createRestaurant(RestaurantRequest restaurant, Long userId) {
         Restaurant record = modelMapper.map(restaurant, Restaurant.class);
+
+        // Make current user the owner of the restaurant
         User user = userService.getById(userId);
         record.setUser(user);
+
+        // Set the pending status
+        record.setStatus(RestaurantStatus.PENDING);
+
+        // Initialize rating
+        record.setRating(0);
+
         return restaurantRepository.save(record);
     }
 

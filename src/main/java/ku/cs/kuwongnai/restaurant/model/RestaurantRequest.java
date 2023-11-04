@@ -41,27 +41,29 @@ public class RestaurantRequest {
 
     private String image;
 
-    // @Size(min = 3, max = 20)
-    private int minPrice;
-    // @Size(min = 3, max = 20)
-    private int maxPrice;
+
     private Boolean isDelivery;
     private Boolean isWalkIn;
 
+    @Size(min = 1, max = 1000)
+    private int minPrice;
+    @Size(min = 1, max = 1000)
+    private int maxPrice;
     private String priceRange;
 
     @Email
     private String email;
+    @Size(min = 3, max = 255)
     private String facebook;
+    @Size(min = 3, max = 255)
     private String line;
+    @Size(min = 3, max = 255)
     private String instagram;
+
+    @Size(min = 3, max = 255)
     private String website;
 
     private List<Day> openDays;
-
-    // @Positive
-    // @Max(5)
-    // private double rating;
 
     // TODO : Add more attributes
 }

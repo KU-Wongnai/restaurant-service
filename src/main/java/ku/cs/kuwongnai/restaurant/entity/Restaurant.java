@@ -32,10 +32,7 @@ public class Restaurant {
     private String description;
     private String location;
     private List<RestaurantCategory> categories;
-    private String dayAvailable;
-    private String openAt;
-    private String closeAt;
-    private RestaurantStatus status = RestaurantStatus.PENDING;
+    private RestaurantStatus status;
     private String contactInfo;
     private String image;
 
@@ -59,6 +56,8 @@ public class Restaurant {
     private String website;
 
     private List<Day> openDays;
+    private String openAt;
+    private String closeAt;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

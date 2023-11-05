@@ -64,6 +64,13 @@ public class RestaurantService {
                         HttpStatus.NOT_FOUND, "Restaurant not found with given ID = " + id));
     }
 
+    public List<Restaurant> getRestaurantByUserId(Long id) {
+        // Get the user to see if exists
+        User user = userService.getById(id);
+
+        return restaurantRepository.findByUserId(id);
+    }
+
     public Restaurant updateRestaurant(Long id, RestaurantRequest requestBody) {
         Restaurant record = getRestaurantById(id);
         record.setName(requestBody.getName());

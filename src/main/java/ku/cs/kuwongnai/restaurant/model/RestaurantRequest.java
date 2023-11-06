@@ -45,10 +45,12 @@ public class RestaurantRequest {
     private Boolean isDelivery;
     private Boolean isWalkIn;
 
-    @Size(min = 1, max = 1000)
-    private int minPrice;
-    @Size(min = 1, max = 1000)
-    private int maxPrice;
+    @Min(value = 0, message = "minPrice must be greater than or equal to 0")
+    private Integer minPrice;
+
+    @Max(value = 1000, message = "maxPrice must be less than or equal to 1000")
+    private Integer maxPrice;
+    
     private String priceRange;
 
     @Email

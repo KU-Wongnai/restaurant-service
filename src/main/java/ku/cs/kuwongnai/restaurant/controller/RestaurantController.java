@@ -1,6 +1,7 @@
 package ku.cs.kuwongnai.restaurant.controller;
 
 import jakarta.validation.Valid;
+import ku.cs.kuwongnai.restaurant.common.RestaurantCategory;
 import ku.cs.kuwongnai.restaurant.entity.Menu;
 import ku.cs.kuwongnai.restaurant.entity.MenuOption;
 import ku.cs.kuwongnai.restaurant.entity.Restaurant;
@@ -94,6 +95,12 @@ public class RestaurantController {
     public ResponseEntity<List<Menu>> getMenus(@PathVariable Long id) {
         List<Menu> menus = service.getMenus(id);
         return new ResponseEntity<>(menus, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/categories")
+    public ResponseEntity<List<RestaurantCategory>> getCategories(@PathVariable Long id) {
+        List<RestaurantCategory> categories = service.getCategories(id);
+        return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
     @PostMapping("/{id}/menu")

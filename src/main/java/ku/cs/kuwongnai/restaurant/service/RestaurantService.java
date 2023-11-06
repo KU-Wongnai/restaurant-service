@@ -1,5 +1,6 @@
 package ku.cs.kuwongnai.restaurant.service;
 
+import ku.cs.kuwongnai.restaurant.common.RestaurantCategory;
 import ku.cs.kuwongnai.restaurant.common.RestaurantStatus;
 import ku.cs.kuwongnai.restaurant.entity.Menu;
 import ku.cs.kuwongnai.restaurant.entity.MenuOption;
@@ -118,6 +119,11 @@ public class RestaurantService {
     public List<Menu> getMenus(Long id) {
         Restaurant restaurant = getRestaurantById(id);
         return restaurant.getMenus();
+    }
+
+    public List<RestaurantCategory> getCategories(Long id) {
+        Restaurant restaurant = getRestaurantById(id);
+        return restaurant.getCategories();
     }
 
     public Menu createMenu(Long id, MenuRequest menu) {

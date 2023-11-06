@@ -80,19 +80,22 @@ public class RestaurantService {
         record.setPhone(requestBody.getPhone());
         record.setImage(requestBody.getImage());
         // record.setRating(requestBody.getRating());
-        return restaurantRepository.save(record);
+        restaurantRepository.save(record);
+        return record;
     }
 
     public Restaurant acceptRestaurant(Long id) {
         Restaurant record = getRestaurantById(id);
         record.setStatus(RestaurantStatus.ACCEPTED);
-        return restaurantRepository.save(record);
+        restaurantRepository.save(record);
+        return record;
     }
 
     public Restaurant declineRestaurant(Long id) {
         Restaurant record = getRestaurantById(id);
         record.setStatus(RestaurantStatus.DECLINED);
-        return restaurantRepository.save(record);
+        restaurantRepository.save(record);
+        return record;
     }
 
     public Restaurant deleteRestaurant(Long id, Long userId) {
@@ -121,7 +124,8 @@ public class RestaurantService {
         Menu record = modelMapper.map(menu, Menu.class);
         Restaurant restaurant = getRestaurantById(id);
         record.setRestaurant(restaurant);
-        return menuRepository.save(record);
+        menuRepository.save(record);
+        return record;
     }
 
     public Menu getMenuById(Long restaurantId, Long menuId) {
@@ -146,7 +150,8 @@ public class RestaurantService {
         record.setImage(requestBody.getImage());
         record.setPrice(requestBody.getPrice());
         record.setCategory(requestBody.getCategory());
-        return menuRepository.save(record);
+        menuRepository.save(record);
+        return record;
     }
 
     public Menu deleteMenu(Long restaurantId, Long menuId) {
@@ -166,7 +171,8 @@ public class RestaurantService {
         MenuOption record = modelMapper.map(menuOption, MenuOption.class);
         Menu menu = getMenuById(restaurantId, menuId);
         record.setMenu(menu);
-        return menuOptionRepository.save(record);
+        menuOptionRepository.save(record);
+        return record;
     }
 
     public MenuOption getMenuOptionById(Long restaurantId, Long menuId, Long menuOptionId) {
@@ -191,7 +197,8 @@ public class RestaurantService {
         record.setName(requestBody.getName());
         record.setPrice(requestBody.getPrice());
         record.setCategory(requestBody.getCategory());
-        return menuOptionRepository.save(record);
+        menuOptionRepository.save(record);
+        return record;
     }
 
     public MenuOption deleteMenuOption(Long restaurantId, Long menuId, Long menuOptionId) {

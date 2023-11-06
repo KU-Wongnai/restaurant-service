@@ -36,7 +36,7 @@ public class RestaurantController {
         return new ResponseEntity<>(restaurants, HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/userRestaurants")
     public ResponseEntity<List<Restaurant>> getUserRestaurants(@AuthenticationPrincipal Jwt jwt) {
         String userId = (String) jwt.getClaims().get("sub");
         List<Restaurant> restaurants = service.getRestaurantByUserId(Long.parseLong(userId));

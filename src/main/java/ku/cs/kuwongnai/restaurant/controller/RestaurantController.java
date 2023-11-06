@@ -10,6 +10,7 @@ import ku.cs.kuwongnai.restaurant.model.MenuOptionRequest;
 import ku.cs.kuwongnai.restaurant.model.MenuPublish;
 import ku.cs.kuwongnai.restaurant.model.MenuRequest;
 import ku.cs.kuwongnai.restaurant.model.RestaurantRequest;
+import ku.cs.kuwongnai.restaurant.notification.NotificationSender;
 import ku.cs.kuwongnai.restaurant.publisher.RabbitMQPublisher;
 import ku.cs.kuwongnai.restaurant.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ import java.util.List;
 @RequestMapping("/api/restaurants")
 public class RestaurantController {
 
+    @Autowired
+    private NotificationSender notificationSender;
     @Autowired
     private RestaurantService service;
 
@@ -50,6 +53,11 @@ public class RestaurantController {
         String userId = (String) jwt.getClaims().get("sub");
         Restaurant createdRestaurant = service.createRestaurant(restaurant, Long.parseLong(userId));
         publisher.publishJson("events.restaurant", "restaurant.created", createdRestaurant);
+        try {
+            notificationSender.sendInAppRestaurantCreateAccount(userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return new ResponseEntity<>(createdRestaurant, HttpStatus.CREATED);
     }
 
@@ -70,6 +78,11 @@ public class RestaurantController {
     public ResponseEntity<Restaurant> accept(@PathVariable Long id) {
         Restaurant acceptedRestaurant = service.acceptRestaurant(id);
         publisher.publishJson("events.restaurant", "restaurant.updated", acceptedRestaurant);
+        try {
+            notificationSender.sendInAppWelcomeNewRestaurant(acceptedRestaurant.getUser().getId().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return new ResponseEntity<>(acceptedRestaurant, HttpStatus.OK);
     }
 
@@ -77,6 +90,11 @@ public class RestaurantController {
     public ResponseEntity<Restaurant> decline(@PathVariable Long id) {
         Restaurant declinedRestaurant = service.declineRestaurant(id);
         publisher.publishJson("events.restaurant", "restaurant.updated", declinedRestaurant);
+        try {
+            notificationSender.sendInAppRestaurantRejectedAccount(declinedRestaurant.getUser().getId().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return new ResponseEntity<>(declinedRestaurant, HttpStatus.OK);
     }
 

@@ -55,14 +55,14 @@ public class RestaurantRequest {
 
     @Email
     private String email;
-    @Size(min = 3, max = 255)
+    @Size(max = 255)
     private String facebook;
-    @Size(min = 3, max = 255)
+    @Size(max = 255)
     private String line;
-    @Size(min = 3, max = 255)
+    @Size(max = 255)
     private String instagram;
 
-    @Size(min = 3, max = 255)
+    @Size(max = 255)
     private String website;
 
     private List<Day> openDays;
